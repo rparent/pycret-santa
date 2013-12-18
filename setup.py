@@ -2,7 +2,7 @@ from setuptools import setup
 
 
 SETTINGS = dict(
-  name = "pycret santa",
+  name = "pycret-santa",
   version = "0.1",
   description = "Package that will help you organizing a Secret Santa party!",
   keywords = ["secret", "santa", "christmas"],

@@ -1,32 +1,29 @@
 import unittest
 
-import pycret_santa.config
 from pycret_santa.mails import BaseMail
 from pycret_santa.guests import Guest
+from pycret_santa.utils import TestUtils
 
 
 class BaseMailTests(unittest.TestCase):
 
-  SENDER_NAME = "John Doe"
-  SENDER_MAIL = "john@mail.com"
-  SUBJECT = "foo"
-  TEXT = "bar %(to)s %(gift_to)s"
-
   def setUp(self):
-    self.sender = Guest(self.SENDER_NAME, self.SENDER_MAIL)
-    self.bm = BaseMail(self.sender, self.SUBJECT, self.TEXT)
+    self.helper = TestUtils()
+    self.sender = self.helper.getSender()
+    self.bm = self.helper.getBaseMail()
 
   def testGetSenderMail(self):
-    self.assertEquals(self.bm.getSenderMail(), self.SENDER_MAIL)
+    self.assertEquals(self.bm.getSenderMail(), self.sender.email)
 
   def testGetMailString(self):
-    to = Guest("John", "john@mail.com")
-    giftTo = Guest("Jack", "jack@mail.com")
+    guestList = self.helper.getGuestList()
+    to = guestList[0]
+    giftTo = guestList[1]
     mailString = self.bm.getMailString(to, giftTo)
     self.assertEquals(type(mailString), str)
     self.assertIn("From: %s" % str(self.sender), mailString)
     self.assertIn("To: %s" % str(to), mailString)
-    self.assertIn("Subject: %s" % self.SUBJECT, mailString)
+    self.assertIn("Subject: %s" % self.bm.subject, mailString)
 
 
 class MailerTests(unittest.TestCase):

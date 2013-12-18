@@ -8,19 +8,17 @@ from pycret_santa.config import MailParameters
 from pycret_santa.guests import Guest
 from pycret_santa.mails import BaseMail, Mailer
 from pycret_santa.secret_santa import SecretSanta, SecretSantaFactory
+from pycret_santa.utils import TestUtils
 
 
 class SecretSantaTests(unittest.TestCase):
 
   def setUp(self):
-    self.guestList = [Guest(name, "%s@domain.com" % name) for name in \
-                      ["John", "Jack", "Julia"]]
-    self.matches = {"John": self.guestList[1], "Jack": self.guestList[2],
-                    "Julia": self.guestList[0]}
+    helper = TestUtils()
+    self.guestList = helper.getGuestList()
+    self.matches = helper.getMatchesDict()
     self.mailer = mox.MockObject(Mailer)
-    self.baseMail = BaseMail(Guest.initFromFormattedString(MailParameters.DEFAULT_SENDER),
-                                MailParameters.DEFAULT_SUBJECT,
-                        "%(to)s, you must offer a gift to %(gift_to)s")
+    self.baseMail = helper.getBaseMail()
 
   @patch("__builtin__.raw_input", lambda x: "y")
   def testRun(self):

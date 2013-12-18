@@ -2,15 +2,7 @@ import getpass
 
 import yaml
 
-
-class Separators(object):
-
-  MAIL_LEFT = "<"
-  MAIL_RIGHT = ">"
-  COUPLE = "&"
-  NO_MATCH = "=>"
-
-
+from pycret_santa import Separators
 from pycret_santa.guests import Guest
 
 class SmtpConfig(object):

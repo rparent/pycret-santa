@@ -1,7 +1,8 @@
 import unittest
 
-from pycret_santa.config import Separators
+from pycret_santa import Separators
 from pycret_santa.guests import Guest, GuestMatcher
+from pycret_santa.utils import TestUtils
 
 
 class GuestTests(unittest.TestCase):
@@ -21,14 +22,13 @@ class GuestTests(unittest.TestCase):
     g.unauthorizedMatches.add("Jack")
     self.assertFalse(g.isMatchAuthorized(g))
     self.assertFalse(g.isMatchAuthorized(Guest("Jack", "jack@mail.com")))
+    self.assertTrue(g.isMatchAuthorized(Guest("Julia", "julia@mail.com")))
 
 
 class GuestMatcherTests(unittest.TestCase):
 
   def setUp(self):
-    guestList = [Guest(name, "%s@domain.com" % name) for name in \
-                 ["John", "Jack", "Julia"]]
-    guestList[0].unauthorizedMatches.add("Jack")
+    guestList = TestUtils().getGuestList()
     self.gm = GuestMatcher(guestList)
 
   def testIsPermutationValid(self):

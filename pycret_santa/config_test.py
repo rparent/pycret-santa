@@ -2,37 +2,33 @@ import unittest
 
 from mock import patch
 
-from pycret_santa.config import Separators, MailParameters, SmtpConfig, SecretSantaParameters
+from pycret_santa.config import Separators, MailParameters, SmtpConfig, \
+  SecretSantaParameters
 from pycret_santa.guests import Guest
-
+from pycret_santa.utils import TestUtils
 
 class MailParametersTest(unittest.TestCase):
 
-  SENDER_NAME = "John Doe"
-  SENDER_MAIL = "john.doe@mail.com"
-  SUBJECT = "foo"
-  TEXT = "bar"
-
   def testInitFromDict(self):
-    params = dict(text = self.TEXT,
-                  subject = self.SUBJECT,
-                  sender = self.SENDER_NAME + " " + Separators.MAIL_LEFT +
-                           self.SENDER_MAIL + Separators.MAIL_RIGHT)
+    helper = TestUtils()
+    params = dict(text = helper.TEXT,
+                  subject = helper.SUBJECT,
+                  sender = helper.getSenderString())
     mp = MailParameters()
     mp.initFromDict(params)
-    self.assertEquals(mp.sender.name, self.SENDER_NAME)
-    self.assertEquals(mp.sender.email, self.SENDER_MAIL)
-    self.assertEquals(mp.text, self.TEXT)
-    self.assertEquals(mp.subject, self.SUBJECT)
+    self.assertEquals(mp.sender.name, helper.SENDER_NAME)
+    self.assertEquals(mp.sender.email, helper.SENDER_EMAIL)
+    self.assertEquals(mp.text, helper.TEXT)
+    self.assertEquals(mp.subject, helper.SUBJECT)
 
   def testInitFromDictWithNoOptionalParameters(self):
-    params = dict(text = self.TEXT)
+    params = dict(text = TestUtils.TEXT)
     mp = MailParameters()
     mp.initFromDict(params)
     defaultSender = Guest.initFromFormattedString(MailParameters.DEFAULT_SENDER)
     self.assertEquals(mp.sender.name, defaultSender.name)
     self.assertEquals(mp.sender.email, defaultSender.email)
-    self.assertEquals(mp.text, self.TEXT)
+    self.assertEquals(mp.text, TestUtils.TEXT)
     self.assertEquals(mp.subject, MailParameters.DEFAULT_SUBJECT)
 
 

@@ -1,7 +1,7 @@
 import itertools
 import random
 
-from pycret_santa.config import Separators
+from pycret_santa import Separators
 
 
 class Guest(object):

@@ -2,6 +2,11 @@
 
     python setup.py install
 
+or directly with `pip`
+
+    pip install pycret-santa
+
+
 **How to run it**
 
 Once the package is installed, create your config file and then simply run
@@ -10,7 +15,9 @@ Once the package is installed, create your config file and then simply run
 
 The config file is written in yaml, an example is available at the root of the directory (sample.yaml).
 
+
 **Tests**
+
 You can launch tests by running
 
     python setup.py nosetests

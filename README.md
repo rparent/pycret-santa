@@ -3,6 +3,7 @@
     python setup.py install
 
 **How to run it**
+
 Once the package is installed, create your config file and then simply run
 
     secretsanta <path_to_your_config_file>

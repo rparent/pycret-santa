@@ -9,7 +9,7 @@ SETTINGS = dict(
   author = "Renaud Parent",
   author_email = "renaud.parent@gmail.com",
   url = "https://github.com/RenaudParent/pycret-santa",
-  download_url = "https://github.com/RenaudParent/pycret-santa/tarballs/0.1",
+  download_url = "https://github.com/RenaudParent/pycret-santa/tarball/0.1",
   packages = ["pycret_santa"],
   package_data = {"pycret_santa": ["*.yaml"]},
   setup_requires = ["nose>=1.0", "mock", "mox"],

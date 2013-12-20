@@ -1,3 +1,5 @@
+This package will help you organize a [Secret Santa][wiki-article] and keep the randomly assigned persons secret to everybody.
+
 **Installation**
 
     python setup.py install
@@ -13,7 +15,7 @@ Once the package is installed, create your config file and then simply run
 
     secretsanta <path_to_your_config_file>
 
-The config file is written in yaml, an example is available in config/sample.yaml.
+The config file is written in yaml, an example is available in pycret_santa/sample.yaml.
 
 
 **Tests**
@@ -21,3 +23,6 @@ The config file is written in yaml, an example is available in config/sample.yam
 You can launch tests by running
 
     python setup.py nosetests
+
+
+[wiki-article]: http://en.wikipedia.org/wiki/Secret_Santa

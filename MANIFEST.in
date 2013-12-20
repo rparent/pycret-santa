@@ -1,2 +1,1 @@
-recursive-include config *.yaml
 recursive-include pycret_santa *.yaml

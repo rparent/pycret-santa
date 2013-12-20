@@ -1,6 +1,9 @@
 import unittest
 
-from pycret_santa.mails import BaseMail
+from mock import patch
+
+from pycret_santa.config import SmtpConfig
+from pycret_santa.mails import BaseMail, Mailer
 from pycret_santa.guests import Guest
 from pycret_santa.utils import TestUtils
 
@@ -27,8 +30,15 @@ class BaseMailTests(unittest.TestCase):
 
 
 class MailerTests(unittest.TestCase):
- # TODO: implement tests for this class
-    pass
+
+  PASSWORD = "pass"
+
+  @patch("getpass.getpass", lambda sc: MailerTests.PASSWORD)
+  def testSetPassword(self):
+    config = SmtpConfig()
+    mailer = Mailer(config)
+    mailer.setPassword()
+    self.assertEquals(mailer._password, self.PASSWORD)
 
 
 if __name__ == "__main__":

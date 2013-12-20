@@ -1,5 +1,6 @@
 # coding: utf-8
 from email.mime.text import MIMEText
+import getpass
 import smtplib
 
 
@@ -27,14 +28,18 @@ class Mailer(object):
   def __init__(self, smtpConfig):
     self._host = smtpConfig.host
     self._port = smtpConfig.port
-    self._username = smtpConfig.username
+    self._username = smtpConfig.user
     self._password = smtpConfig.password
     self._smtpClient = smtplib.SMTP(self._host, self._port)
 
-  def __del__(self):
-    self.closeConnection()
+  def setPassword(self):
+    self._password = getpass.getpass("Please provide smtp password for user "
+                                     "%s on server %s: " % (self._username,
+                                                            self._host))
 
   def startConnection(self):
+    if not self._password:
+      self.setPassword()
     self._smtpClient.ehlo()
     self._smtpClient.starttls()
     self._smtpClient.ehlo()

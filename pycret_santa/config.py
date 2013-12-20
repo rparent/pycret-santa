@@ -1,4 +1,3 @@
-import getpass
 
 import yaml
 
@@ -20,10 +19,6 @@ class SmtpConfig(object):
     self.host = params.get("host") or self.DEFAULT_HOST
     self.port = params.get("port") or self.DEFAULT_PORT
     self.user = params.get("username") or None
-
-  def setPassword(self):
-    self.password = getpass.getpass("Please provide smtp password for user %s "
-                                    "on server %s: " % (self.user, self.host))
 
 
 class MailParameters(object):
@@ -60,7 +55,6 @@ class SecretSantaParameters(object):
                       for guestString in params["Guests"]]
     self.smtp.initFromDict(params["Smtp"])
     self.mail.initFromDict(params["Mail"])
-    self.smtp.setPassword()
     self._handleCouples(params["Couples"])
     self._handleNoMatchList(params["No_match"])
 

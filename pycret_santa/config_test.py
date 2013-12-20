@@ -37,7 +37,6 @@ class SmtpConfigTest(unittest.TestCase):
   HOST = "smtp.domain.com"
   PORT = 123
   USER = "user"
-  PASSWORD = "pass"
 
   def testInitFromDict(self):
     params = dict(host = self.HOST,
@@ -58,12 +57,6 @@ class SmtpConfigTest(unittest.TestCase):
     self.assertEquals(sc.port, SmtpConfig.DEFAULT_PORT)
     self.assertEquals(sc.user, None)
     self.assertEquals(sc.password, None)
-
-  @patch("getpass.getpass", lambda sc: SmtpConfigTest.PASSWORD)
-  def testSetPassword(self):
-    sc = SmtpConfig()
-    sc.setPassword()
-    self.assertEquals(sc.password, self.PASSWORD)
 
 
 class SecretSantaParametersTest(unittest.TestCase):

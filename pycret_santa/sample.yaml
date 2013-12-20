@@ -1,0 +1,36 @@
+Guests: # Mandatory section.
+  - Joanna <joanna@domain.com>
+  - Juliet <juliet@domain.com>
+  - Jack <jack@domain.com>
+  - John <john@domain.com>
+Couples: # Optional section
+  - Joanna & John
+No_match: # Optional section
+  - John => Jack
+
+Mail: # Mandatory section
+  sender: # Optional
+    Your Name <your_mail@mail.com>
+  subject: # Optional
+    Secret Santa !
+  text: # Mandatory
+    Hello,
+
+
+    Your text here...
+
+    More text...
+
+
+    %(to)s, your gift will be for %(gift_to)s!
+    # WARNING: You MUST leave the previous line in the text (at least the
+    # %(to)s and %(gift_to)s words, otherwise it won't work ! You can put it
+    # anywhere in the text though.
+
+Smtp: # Mandatory section
+  host: # Optional
+    smtp.gmail.com
+  port: # Optional
+    587
+  username: # Optional
+    your.gmail.username

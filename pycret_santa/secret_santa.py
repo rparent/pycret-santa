@@ -1,8 +1,10 @@
+import os
 import sys
 
 from pycret_santa.config import SecretSantaParameters
 from pycret_santa.guests import Guest, GuestMatcher
 from pycret_santa.mails import BaseMail, Mailer
+from pycret_santa.utils import getPackageConfigPath
 
 
 class SecretSanta(object):
@@ -80,6 +82,8 @@ def main():
     secretSanta = SecretSantaFactory().getFromConfigFile(sys.argv[1])
   else:
     print "Usage: secretsanta [<path_to_config_file>]"
+    print "You can find a config file example here: %s/sample.yaml" % \
+           os.path.normpath(getPackageConfigPath())
     sys.exit(1)
   secretSanta.run()
 

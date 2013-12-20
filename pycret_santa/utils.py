@@ -1,9 +1,14 @@
+import os
 
 from pycret_santa import Separators
 from pycret_santa.config import MailParameters
 from pycret_santa.guests import Guest
 from pycret_santa.mails import BaseMail
 
+
+def getPackageConfigPath():
+  return os.path.join(os.path.abspath(os.path.dirname(__file__)), "..",
+                      "config")
 
 class TestUtils(object):
 

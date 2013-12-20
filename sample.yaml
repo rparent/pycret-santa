@@ -22,10 +22,10 @@ Mail: # Mandatory section
     More text...
 
 
-    # WARNING: You MUST leave the following line in the text (at least the
+    %(to)s, your gift will be for %(gift_to)s!
+    # WARNING: You MUST leave the previous line in the text (at least the
     # %(to)s and %(gift_to)s words, otherwise it won't work ! You can put it
     # anywhere in the text though.
-    %(to)s, your gift will be for %(gift_to)s!
 
 Smtp: # Mandatory section
   host: # Optional

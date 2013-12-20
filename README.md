@@ -13,7 +13,7 @@ Once the package is installed, create your config file and then simply run
 
     secretsanta <path_to_your_config_file>
 
-The config file is written in yaml, an example is available at the root of the directory (sample.yaml).
+The config file is written in yaml, an example is available in config/sample.yaml.
 
 
 **Tests**

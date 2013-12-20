@@ -70,10 +70,8 @@ class SecretSantaFactory(object):
   def _getSecretSanta(self, params):
     guestList = params.guestList
     matches = GuestMatcher(guestList).getMatches()
-    mailer = Mailer(params.smtp.host, params.smtp.port, params.smtp.user,
-                    params.smtp.password)
-    baseMail = BaseMail(params.mail.sender, params.mail.subject,
-                        params.mail.text)
+    mailer = Mailer(params.smtp)
+    baseMail = BaseMail(params.mail)
     return SecretSanta(guestList, matches, mailer, baseMail)
 
 

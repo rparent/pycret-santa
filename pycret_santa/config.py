@@ -10,11 +10,11 @@ class SmtpConfig(object):
   DEFAULT_HOST = "localhost"
   DEFAULT_PORT = 25
 
-  def __init__(self):
-    self.host = None
-    self.port = None
-    self.user = None
-    self.password = None
+  def __init__(self, host=None, port=None, user=None, password=None):
+    self.host = host
+    self.port = port
+    self.user = user
+    self.password = password
 
   def initFromDict(self, params):
     self.host = params.get("host") or self.DEFAULT_HOST
@@ -32,10 +32,11 @@ class MailParameters(object):
                     (Separators.MAIL_LEFT, Separators.MAIL_RIGHT)
   DEFAULT_SUBJECT = "Secret Santa!"
 
-  def __init__(self):
-    self.sender = None
-    self.subject = None
-    self.text = None
+  def __init__(self, sender=DEFAULT_SENDER, subject=DEFAULT_SUBJECT,
+               text=None):
+    self.sender = sender
+    self.subject = subject
+    self.text = text
 
   def initFromDict(self, params):
     self.sender = Guest.initFromFormattedString(params.get("sender") \
@@ -47,10 +48,10 @@ class MailParameters(object):
 
 class SecretSantaParameters(object):
 
-  def __init__(self):
+  def __init__(self, guestList=[], smtpConfig=None, mailParams=None):
     self.guestList = []
-    self.smtp = SmtpConfig()
-    self.mail = MailParameters()
+    self.smtp = smtpConfig or SmtpConfig()
+    self.mail = mailParams or MailParameters()
 
   def initFromFile(self, filePath):
     with open(filePath, "r") as fd:

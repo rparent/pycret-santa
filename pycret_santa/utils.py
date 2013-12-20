@@ -37,5 +37,6 @@ class TestUtils(object):
             Separators.MAIL_RIGHT)
 
   def getBaseMail(self):
-    return BaseMail(self.getSender(), self.SUBJECT, self.TEXT)
+    params = MailParameters(self.getSender(), self.SUBJECT, self.TEXT)
+    return BaseMail(params)
 

@@ -5,10 +5,10 @@ import smtplib
 
 class BaseMail(object):
 
-  def __init__(self, sender, subject, text):
-    self.sender = sender
-    self.subject = subject
-    self.text = text
+  def __init__(self, mailParameters):
+    self.sender = mailParameters.sender
+    self.subject = mailParameters.subject
+    self.text = mailParameters.text
 
   def getSenderMail(self):
     return self.sender.email
@@ -24,11 +24,11 @@ class BaseMail(object):
 
 class Mailer(object):
 
-  def __init__(self, host, port, username, password):
-    self._host = host
-    self._port = port
-    self._username = username
-    self._password = password
+  def __init__(self, smtpConfig):
+    self._host = smtpConfig.host
+    self._port = smtpConfig.port
+    self._username = smtpConfig.username
+    self._password = smtpConfig.password
     self._smtpClient = smtplib.SMTP(self._host, self._port)
 
   def __del__(self):

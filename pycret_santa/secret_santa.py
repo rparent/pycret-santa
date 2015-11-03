@@ -13,7 +13,7 @@ class SecretSanta(object):
 *********************
 *    SECRET SANTA   *
 *********************
-The mail will be send by %(sender)s
+The mail will be sent by %(sender)s
 To:
 %(guests)s
 
@@ -81,9 +81,12 @@ def main():
   if len(sys.argv) == 2:
     secretSanta = SecretSantaFactory().getFromConfigFile(sys.argv[1])
   else:
-    print "Usage: secretsanta [<path_to_config_file>]"
-    print "You can find a config file example here: %s/sample.yaml" % \
-           os.path.normpath(getDataPath())
+    with open(os.path.join(getDataPath(), "sample.yaml"), 'r') as f:
+      print "Usage: secretsanta [<path_to_config_file>]"
+      print "Content of your config file should look like this:"
+      print "--------"
+      print f.read()
+      print "--------"
     sys.exit(1)
   secretSanta.run()
 

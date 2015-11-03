@@ -1,11 +1,13 @@
+import os
 import unittest
 
-from mock import patch
+from mock import mock_open, patch
+import yaml
 
 from pycret_santa.config import Separators, MailParameters, SmtpConfig, \
   SecretSantaParameters
 from pycret_santa.guests import Guest
-from pycret_santa.utils import TestUtils
+from pycret_santa.utils import getDataPath, TestUtils
 
 class MailParametersTest(unittest.TestCase):
 
@@ -65,6 +67,19 @@ class SecretSantaParametersTest(unittest.TestCase):
     self.ssp = SecretSantaParameters()
     self.ssp.guestList = [Guest(name, "%s@domain.com" % name) for name in \
                           ["John", "Jack", "Julia"]]
+
+  def testInitFromFile(self):
+    self.ssp.initFromFile(os.path.join(getDataPath(), "sample.yaml"))
+
+  def testInitFromFileWithNoOptionalParameters(self):
+    with open(os.path.join(getDataPath(), "sample.yaml"), 'r') as f:
+      params = yaml.load(f)
+    params.pop("Couples")
+    params.pop("No_match")
+    with patch('pycret_santa.config.open',
+        mock_open(read_data=yaml.dump(params)), create=True) as m:
+      self.ssp.initFromFile("dummy")
+
 
   def testHandleCouples(self):
     couples = ["Julia %s John" % Separators.COUPLE]

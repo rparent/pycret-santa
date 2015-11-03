@@ -51,6 +51,10 @@ class GuestMatcherTests(unittest.TestCase):
                                  "Jack": self.gm.guestList[0],
                                  "Julia": self.gm.guestList[1]})
 
+  def testGetMatchesWithNoValidPermutation(self):
+    self.gm.guestList[0].unauthorizedMatches.add("Julia")
+    with self.assertRaises(RuntimeError):
+      self.gm.getMatches()
 
 if __name__ == "__main__":
   unittest.main()

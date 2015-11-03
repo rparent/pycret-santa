@@ -34,6 +34,8 @@ class Guest(object):
 
 class GuestMatcher(object):
 
+  NB_MAX_ATTEMPTS = 500
+
   def __init__(self, guestList):
     self.guestList = guestList
 
@@ -48,7 +50,15 @@ class GuestMatcher(object):
             xrange(len(self.guestList))}
 
   def getMatches(self):
+    nbAttempts = 0
     shuffledList = self.guestList[:]
     while not self._isPermutationValid(shuffledList):
       random.shuffle(shuffledList)
+      nbAttempts += 1
+      if nbAttempts > self.NB_MAX_ATTEMPTS:
+        raise RuntimeError("Unable to find a suitable repartition for "
+            "this guest list. Try removing some constraints in the Couples "
+            " and No_match sections from the config file, or try increasing "
+            "the GuestMatcher.NB_MAX_ATTEMPTS if you are confident there are "
+            "possible repartitions.")
     return self._getMatchesAsDict(shuffledList)

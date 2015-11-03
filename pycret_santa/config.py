@@ -55,8 +55,12 @@ class SecretSantaParameters(object):
                       for guestString in params["Guests"]]
     self.smtp.initFromDict(params["Smtp"])
     self.mail.initFromDict(params["Mail"])
-    self._handleCouples(params["Couples"])
-    self._handleNoMatchList(params["No_match"])
+    couples = params.get("Couples")
+    if couples:
+      self._handleCouples(couples)
+    noMatches = params.get("No_match")
+    if noMatches:
+      self._handleNoMatchList(noMatches)
 
   def initFromCommandLine(self):
     # TODO: implement this method...
